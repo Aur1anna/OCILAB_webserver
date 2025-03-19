@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎 | 计算成像实验室</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .button-group {
+            margin: 30px 0;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-register {
+            background: #2196F3;
+        }
+
+        #current-time {
+            font-size: 36px;
+            color: #2c3e50;
+            margin: 10px 0;
+            font-weight: 300;
+        }
+
+        .time-section {
+            margin: 30px 0;
+        }
+
+        .dynamic-content {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        #quote {
+            font-size: 18px;
+            color: #34495e;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .weather {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 欢迎访问计算成像实验室 🎉</h1>
+        
+        <div class="button-group">
+            <button class="btn" onclick="location.href='/login.html'">登录</button>
+            <button class="btn btn-register" onclick="location.href='/register.html'">注册</button>
+        </div>
+
+        <div class="time-section">
+            <h2 style="font-size: 24px; margin-bottom: 8px;">🕒 北京时间</h2>
+            <div id="current-time"></div>
+        </div>
+
+        <div class="dynamic-content">
+            <div id="greeting"></div>
+            <div id="quote"></div>
+            <div class="weather">🌤️ 当前天气：24°C 晴</div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <img src="images/mainbuilding.png" alt="示例图片" style="width: 100%; max-width: 1600px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+        </div>
+    </div>
+
+    <script>
+        // 实时时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', { 
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).replace(/\//g, '-');
+            
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // 动态问候语
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            if (hour < 6) greeting = '🌙 夜深了，注意休息哦～';
+            else if (hour < 12) greeting = '🌞 早上好！开启美好的一天吧！';
+            else if (hour < 18) greeting = '☀️ 下午好！今天过得怎么样？';
+            else greeting = '🌆 晚上好！今天收获如何？';
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        // 随机名言
+        const quotes = [
+            "「代码就像诗，最好既简短又美丽」 - Linus Torvalds",
+            "「Stay hungry, stay foolish」 - Steve Jobs",
+            "「我们选择登月不是因为它容易，而是因为它困难」 - 约翰·肯尼迪",
+            "「想象力比知识更重要」 - 爱因斯坦",
+            "「代码首先是给人看的，其次才是给机器执行的」 - Code Philosophy"
+        ];
+        document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+        // 初始化
+        updateTime();
+        updateGreeting();
+        setInterval(() => {
+            updateTime();
+            updateGreeting();
+        }, 1000);
+
+        // 优雅的鼠标跟随渐变特效
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.position = 'fixed';
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.width = '10px';
+            cursor.style.height = '10px';
+            cursor.style.background = 'radial-gradient(circle, rgba(74,144,226,0.8), rgba(74,144,226,0.2))';
+            cursor.style.borderRadius = '50%';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.zIndex = '9999';
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursor.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+
+            document.body.appendChild(cursor);
+
+            // 动态淡出+缩小
+            setTimeout(() => {
+                cursor.style.opacity = '0';
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+            }, 10);
+
+            // 完全消失后删除
+            setTimeout(() => cursor.remove(), 500);
+        
+        });
+        
+    </script>
+</body>
+</html>

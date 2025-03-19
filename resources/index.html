@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页 | 计算成像实验室</title>
+    <style>
+        :root {
+            --primary-blue: #0b55a0;
+            --accent-blue: #3498db;
+            --text-light: #ecf0f1;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+        }
+
+        /* 头部区域 */
+        .header {
+            background: var(--primary-blue);
+            padding: 2rem 1rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--text-light);
+            transition: transform 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: rotate(15deg);
+        }
+
+        .title-group {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            margin: 1rem 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .sub-title {
+            font-size: 1.4rem;
+            opacity: 0.9;
+        }
+
+        /* 展示区网格 */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 5%;
+        }
+
+        /* 展示卡片 */
+        .showcase-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 幻灯片容器 */
+        .slider-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            position: absolute;
+            width: 400%;
+            height: 100%;
+            display: flex;
+            animation: slide 20s infinite linear;
+        }
+
+        .slider-item {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 文字内容 */
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .card-title:hover {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        .card-desc {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        @keyframes slide {
+            0%, 100% { left: 0; }
+            25% { left: -100%; }
+            50% { left: -200%; }
+            75% { left: -300%; }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .slider-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="badge-container">
+            <img src="images/uestcbadge.png" class="badge" alt="校徽">
+            <img src="images/schoolbadge.png" class="badge" alt="学院徽章">
+        </div>
+        
+        <div class="title-group">
+            <h1 class="main-title">
+                <div>电子科技大学电子薄膜与集成器件国家重点实验室</div>
+                <div>计算成像实验室</div>
+            </h1>
+            <p class="sub-title">欢迎探索计算视觉的无限可能</p>
+        </div>
+    </header>
+
+    <main class="showcase-grid">
+        <!-- 展示卡1 -->
+        <article class="showcase-card">
+            <div class="slider-container">
+                <div class="slider-track">
+                    <div class="slider-item" style="background-image: url('images/showcase/1-1.jpg')"></div>
+                    <div class="slider-item" style="background-image: url('images/showcase/1-2.jpg')"></div>
+                    <div class="slider-item" style="background-image: url('images/showcase/1-3.jpg')"></div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title" onclick="location.href='/field.html'">光场超分辨数字成像</h2>
+                <p class="card-desc">突破传统光学限制，开发新一代计算成像算法...</p>
+            </div>
+        </article>
+
+        <!-- 展示卡2 -->
+        <article class="showcase-card">
+            <div class="slider-container">
+                <div class="slider-track">
+                    <div class="slider-item" style="background-image: url('images/showcase/2-1.jpg')"></div>
+                    <div class="slider-item" style="background-image: url('images/showcase/2-2.jpg')"></div>
+                    <div class="slider-item" style="background-image: url('images/showcase/2-3.jpg')"></div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title" onclick="location.href='/3dgs.html'">红外三维重建</h2>
+                <p class="card-desc">RGB与红外场景三维重建，深度学习拥有无限可能...</p>
+            </div>
+        </article>
+
+        <!-- 展示卡3 -->
+        <article class="showcase-card">
+            <div class="slider-container">
+                <div class="slider-track">
+                    <div class="slider-item" style="background-image: url('images/showcase/3-1.jpg')"></div>
+                    <div class="slider-item" style="background-image: url('images/showcase/3-2.jpg')"></div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title" onclick="location.href='/sim.html'">SIM超分辨显微成像</h2>
+                <p class="card-desc">兼顾高分辨率和大视场，超分辨显微魅力时刻...</p>
+            </div>
+        </article>
+
+        <!-- 展示卡4 -->
+        <article class="showcase-card">
+            <div class="slider-container">
+                <div class="slider-track">
+                    <div class="slider-item" style="background-image: url('images/showcase/4-1.jpg')"></div>
+                    <div class="slider-item" style="background-image: url('images/showcase/4-2.jpg')"></div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title" onclick="location.href='/grbt.html'">RGBT语义分割与图像融合</h2>
+                <p class="card-desc">可见光纹理与红外热信息，碰撞产生绚丽火花...</p>
+            </div>
+        </article>
+    </main>
+    <script>
+    // 优雅的鼠标跟随渐变特效
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.position = 'fixed';
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.width = '10px';
+            cursor.style.height = '10px';
+            cursor.style.background = 'radial-gradient(circle, rgba(74,144,226,0.8), rgba(74,144,226,0.2))';
+            cursor.style.borderRadius = '50%';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.zIndex = '9999';
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursor.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+
+            document.body.appendChild(cursor);
+
+            // 动态淡出+缩小
+            setTimeout(() => {
+                cursor.style.opacity = '0';
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+            }, 10);
+
+            // 完全消失后删除
+            setTimeout(() => cursor.remove(), 500);
+        
+        });
+    </script>
+</body>
+</html>

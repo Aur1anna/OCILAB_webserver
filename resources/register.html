@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>注册 | 计算成像实验室</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --error-color: #ff4757;
+            --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: var(--background-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            max-width: 400px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .auth-container:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        .footer-links {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>✨ 用户注册</h1>
+        <form class="auth-form" action="/3" method="post">
+            <input type="text" name="user" placeholder="请输入用户名" required>
+            <input type="password" name="password" placeholder="请输入密码" required>
+            <input type="password" name="password_confirm" placeholder="请再次输入密码" required>
+            <button type="submit" class="submit-btn">注册账号</button>
+            <script>
+            document.querySelector(".auth-form").addEventListener("submit", function(e) {
+                const pwd1 = document.querySelector("input[name='password']").value;
+                const pwd2 = document.querySelector("input[name='password_confirm']").value;
+                
+                // 创建错误提示元素
+                const errorDiv = document.createElement('div');
+                errorDiv.style.color = '#ff4757';
+                errorDiv.style.textAlign = 'center';
+                errorDiv.style.margin = '10px 0';
+                
+                // 移除已存在的错误提示
+                const existingError = document.querySelector('.pwd-error');
+                if(existingError) existingError.remove();
+            
+                if(pwd1 !== pwd2) {
+                    errorDiv.textContent = '⚠️ 两次输入的密码不一致';
+                    errorDiv.className = 'pwd-error';
+                    this.insertBefore(errorDiv, this.querySelector('button'));
+                    e.preventDefault();
+                    return false;
+                }
+                return true;
+            });
+            </script>
+        </form>
+        <div class="footer-links">
+            已有账号？<a href="/login.html">立即登录</a>
+        </div>
+    </div>
+    
+</body>
+</html>
